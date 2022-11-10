@@ -15,14 +15,18 @@ server.listen(3000, () => {
 });
 
 
+
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
   });
 
 io.on('connection', (socket) => {
     console.log('Socket nuevo '+socket.id);
-    socket.on('mensaje', (msg) => {
-      io.emit('mensaje', msg);
-      console.log(msg);
+    socket.on('mensaje', () => {
+      mensj="Mensaje recibido "+ socket.id;
+      io.emit('mensaje', mensj);
+
+      console.log(mensj);
     });
   });
